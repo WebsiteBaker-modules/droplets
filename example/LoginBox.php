@@ -2,13 +2,12 @@
 //:Use: [[LoginBox?redirect=url]]
 //:Absolute or relative url possible
 //:Remember to enable frontend login in your website settings!!
-global $wb,$page_id,$TEXT, $MENU, $HEADING;
+global $database,$wb, $TEXT, $MENU, $HEADING;
 $return_value = '<div class="login-box">'."\n";
 $return_admin = ' ';
 // Return a system permission
-function get_permission($name, $type = 'system')
+$get_permission = function ($name, $type = 'system') use ( $wb )
 {
-global $wb;
 // Append to permission type
 $type .= '_permissions';
 // Check if we have a section to check for
@@ -36,41 +35,42 @@ return true;
 }
 }
 }
-}
-function get_page_permission($page, $action='admin') {
+};
+$get_page_permission = function ($page, $action='admin') use ( $database, $wb )
+{
 if ($action!='viewing'){ $action='admin';}
-$action_groups=$action.'_groups';
-$action_users=$action.'_users';
+$action_groups = $action.'_groups';
+$action_users  = $action.'_users';
 if (is_array($page)) {
-$groups=$page[$action_groups];
-$users=$page[$action_users];
+$groups = $page[$action_groups];
+$users  = $page[$action_users];
 } else {
-global $database,$wb;
-$results = $database->query("SELECT $action_groups,$action_users FROM ".TABLE_PREFIX."pages WHERE page_id = '$page'");
-$result = $results->fetchRow();
-$groups = explode(',', str_replace('_', '', $result[$action_groups]));
-$users = explode(',', str_replace('_', '', $result[$action_users]));
+$sql  = 'SELECT '.$action_groups.','.$action_users.' FROM '.TABLE_PREFIX.'pages '
+. 'WHERE page_id = \''.$page.'\'';
+if($oResults = $database->query( $sql )){
+$aResult  = $oResults->fetchRow( MYSQLI_ASSOC );
+$groups  = explode(',', str_replace('_', '', $aResult[$action_groups]));
+$users   = explode(',', str_replace('_', '', $aResult[$action_users]));
 }
-$in_group = FALSE;
+}
+$in_group = false;
 foreach($wb->get_groups_id() as $cur_gid){
-if (in_array($cur_gid, $groups)) {
-$in_group = TRUE;
+if (in_array( $cur_gid, $groups )) {
+$in_group = true;
 }
 }
-if((!$in_group) AND !is_numeric(array_search($wb->get_user_id(), $users))) {
+if( !$in_group && !is_numeric(array_search( $wb->get_user_id(), $users )) ) {
 return false;
 }
 return true;
-}
+};
 // Get redirect
 $redirect_url = ((isset($_SESSION['HTTP_REFERER']) && $_SESSION['HTTP_REFERER'] != '') ? $_SESSION['HTTP_REFERER'] : WB_URL );
-$redirect_url = (isset($redirect) && ($redirect!='') ? $redirect : $redirect_url);
-if ( ( FRONTEND_LOGIN == 'enabled') &&
-( VISIBILITY != 'private') &&
-( $wb->get_session('USER_ID') == '')  )
+$redirect_url = ( isset($redirect) && ($redirect!='') ? $redirect : $redirect_url);
+if ( ( FRONTEND_LOGIN == 'enabled') && ( VISIBILITY != 'private') && ( $wb->get_session('USER_ID') == '')  )
 {
 $return_value .= '<form action="'.LOGIN_URL.'" method="post">'."\n";
-$return_value .= '<input type="hidden" name="url" value="'.$redirect_url.'" />'."\n";
+$return_value .= '<input type="hidden" name="redirect" value="'.$redirect_url.'" />'."\n";
 $return_value .= '<fieldset>'."\n";
 $return_value .= '<h1>'.$TEXT['LOGIN'].'</h1>'."\n";
 $return_value .= '<label for="username">'.$TEXT['USERNAME'].':</label>'."\n";
@@ -87,10 +87,10 @@ $return_value .= '<li class="sign"><a href="'.SIGNUP_URL.'">'.$TEXT['SIGNUP'].'<
 $return_value .= '</ul>'."\n";
 $return_value .= '</fieldset>'."\n";
 $return_value .= '</form>'."\n";
-} elseif( (FRONTEND_LOGIN == 'enabled') &&
-(is_numeric($wb->get_session('USER_ID'))) )
+} elseif( (FRONTEND_LOGIN == 'enabled') && (is_numeric($wb->get_session('USER_ID'))) )
 {
 $return_value .= '<form action="'.LOGOUT_URL.'" method="post" class="login-table">'."\n";
+$return_value .= '<input type="hidden" name="redirect" value="'.$redirect_url.'" />'."\n";
 $return_value .= '<fieldset>'."\n";
 $return_value .= '<h1>'.$TEXT["LOGGED_IN"].'</h1>'."\n";
 $return_value .= '<label>'.$TEXT['WELCOME_BACK'].', '.$wb->get_display_name().'</label>'."\n";
@@ -104,7 +104,7 @@ $return_admin .= '<li class="admin"><a target="_blank" href="'.ADMIN_URL.'/index
 $return_value .= $return_admin;
 }
 //change ot the group that should get special links
-if( get_permission('pages_modify') && get_page_permission( PAGE_ID ) )
+if( $get_permission('pages_modify') && $get_page_permission( PAGE_ID ) )
 {
 $return_value .= '<li class="modify"><a target="_blank" href="'.ADMIN_URL.'/pages/modify.php?page_id='.PAGE_ID.'" title="'.$HEADING['MODIFY_PAGE'].'" class="blank_target">'.$HEADING['MODIFY_PAGE'].'</a></li>'."\n";
 }

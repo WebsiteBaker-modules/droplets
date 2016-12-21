@@ -13,7 +13,7 @@ var Droplet = {
     <div class="droplets overview" id="cb-droplets" >
         <form action="{ToolUrl}" method="post" name="droplets_form">
             <input type="hidden" name="{FTAN_NAME}" value="{FTAN_VALUE}" />
-            <table class="droplets">
+            <table class="droplets" id="DropletsTable">
                 <tbody>
                     <tr>
                         <td >
@@ -30,14 +30,14 @@ var Droplet = {
             <h2>{MODIFY}/{DELETE} {DROPLETS}</h2>
             <div id="dr-legende">
                 <ul>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/modify_32.png" alt="" /> {MODIFY}</li>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/copy_32.png" alt="" /> {COPY_DROPLET}</li>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/rename_24.png" alt="" /> {RENAME}</li>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/delete_32.png" alt="" /> {DELETE}</li>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/status_1_1.png" alt="" /> {ACTIVE}</li>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/status_1_0.png" alt="" /> {INACTIVE}</li>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/droplet_24.png" alt="" /> {VALID_CODE}</li>
-                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/invalid_24.png" alt="" /> {INVALID_CODE}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/modify.png" alt="" /> {MODIFY}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/copy.png" alt="" /> {COPY_DROPLET}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/rename.png" alt="" /> {RENAME}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/delete.png" alt="" /> {DELETE}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/status_1_1.png" alt="" /> {ACTIVE}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/status_1_0.png" alt="" /> {INACTIVE}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/droplet.png" alt="" /> {VALID_CODE}</li>
+                    <li class="dr-btn"><img src="{sAddonThemeUrl}/img/24/invalid.png" alt="" /> {INVALID_CODE}</li>
                 </ul>
             </div>
             <div class="tableContainer" id="tableContainer">
@@ -52,11 +52,11 @@ var Droplet = {
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th class="sortierbar">{NAME}</th>
+                            <th class="sortierbar vorsortiert+">{NAME}</th>
                             <th class="sortierbar">{DESCRIPTION}</th>
-                            <th class="sortiere-">{MODIFIED_WHEN}</th>
+                            <th class="sortierbar">{MODIFIED_WHEN}</th>
                             <th></th>
-                            <th class="sortierbar" >{ACTIVE}</th>
+                            <th id="DropletsActive" >{ACTIVE}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -82,23 +82,24 @@ var Droplet = {
                             </td>
                             <td >
                                 <button name="command" type="submit" class="noButton" value="copy_droplet?droplet_id={iDropletIdKey}" title="">
-                                    <img src="{sAddonThemeUrl}/img/copy_32.png" alt="" />
+                                    <img src="{sAddonThemeUrl}/img/24/copy.png" alt="" />
                                 </button>
                             </td>
                             <td>
                                 <button name="command" type="submit" class="noButton" value="modify_droplet?droplet_id={iDropletIdKey}" title="">
-                                    <img src="{sAddonThemeUrl}/img/modify_32.png" alt="" />
+                                    <img src="{sAddonThemeUrl}/img/24/modify.png" alt="" />
                                 </button>
                             </td>
                             <td>
                                 <button name="command" type="submit" class="noButton" value="modify_droplet?droplet_id={iDropletIdKey}">
-                                     <img src="{sAddonThemeUrl}/img/{icon}_24.png" alt=""/>
+                                     <img src="{sAddonThemeUrl}/img/24/{icon}.png" alt=""/>
                                 </button>
                             </td>
                             <td >
-                                <button  class=" noButton" name="command" type="submit" value="modify_droplet?droplet_id={iDropletIdKey}" title="{sDropletTitle}"">
+                                <button  class="noButton" name="command" type="submit" value="modify_droplet?droplet_id={iDropletIdKey}" title="{sDropletTitle}">
                                     {sDropletName}
-                                <span id="tooltip_{DropletId}">{comments}</span></button>
+                                    <span id="tooltip_{DropletId}">{comments}</span>
+                                </button>
                             </td>
                             <td>
                                 {sDropletDescription}
@@ -108,15 +109,15 @@ var Droplet = {
                             </td>
                             <td >
                                 <button name="command" type="submit" class="noButton" value="rename_droplet?droplet_id={iDropletIdKey}" title="">
-                                    <img src="{sAddonThemeUrl}/img/rename_24.png" alt="" />
+                                    <img src="{sAddonThemeUrl}/img/24/rename.png" alt="" />
                                 </button>
                             </td>
-                            <td class="active_status">
-                                <img id="active_{DropletId}" src="{sAddonThemeUrl}/img/{ActiveIcon}.png" alt=""  />
+                            <td class="active_status" data-sort_key="{ActiveIcon}">
+                                <img id="active_{DropletId}" src="{sAddonThemeUrl}/img/24/status_{ActiveIcon}.png" alt=""  />
                             </td>
                             <td>
                                 <button name="command" type="submit" class="noButton" value="delete_droplet?droplet_id={iDropletIdKey}" title="">
-                                    <img src="{sAddonThemeUrl}/img/delete_32.png" alt="" />
+                                    <img src="{sAddonThemeUrl}/img/24/delete.png" alt="" />
                                 </button>
                             </td>
                         </tr>
@@ -138,5 +139,16 @@ var Droplet = {
             </div>
         </form><!-- droplets_form -->
     </div><!-- droplets -->
+<script type="text/javascript">
+<!--
+var table = $('#DropletsTable').DataTable( {
+    ajax: "data.json"
+});
+setInterval( function () {
+    table.ajax.reload( null, false ); // user paging is not reset on reload
+}, 30000 );
+setInterval();
+-->
+</script>
 <script src="{sAddonThemeUrl}/js/TableSort.js"></script>
 <!-- END main_block -->

@@ -1,6 +1,7 @@
 //:Load the view.php from any other section-module
 //:Use [[SectionPicker?sid=123]]
-    global $database, $wb, $TEXT, $DGTEXT;
+global $database, $wb, $TEXT, $DGTEXT,$section_id,$page_id;
+    $sRetVal = '';
     $content = '';
     $_sFrontendCss = '';
     $sid = isset( $sid) ? intval( $sid) : 0;
@@ -38,18 +39,19 @@
                     $_sFrontendCss = '
                       <script type="text/javascript">
                       <!--
-                         var ModuleCss = WB_URL+"/modules/minicalendar/frontend.css";
-                         var ModuleJs = WB_URL+"/modules/minicalendar/frontend.js";
-                            include_file(ModuleJs, "js");
+                         var ModuleCss = WB_URL+"/modules/'.$module.'/frontend.css";
+                         var ModuleJs = WB_URL+"/modules/'.$module.'/frontend.js";
+                          include_file(ModuleJs, "js");
                           if (typeof LoadOnFly === "undefined"){
                               include_file(ModuleCss, "css");
                           } else {
                               LoadOnFly("head", ModuleCss);
-                          }                      -->
+                          }
+                      -->
                       </script>
                       ';
                 }
             }
         }
     }
-    return $_sFrontendCss.$content;
+    return $_sFrontendCss.$content;

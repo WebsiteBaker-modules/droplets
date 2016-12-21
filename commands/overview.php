@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: overview.php 16 2016-09-13 20:52:49Z dietmar $
+ * @version         $Id: overview.php 124 2016-11-26 09:27:02Z dietmar $
  * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/commands/overview.php $
- * @lastmodified    $Date: 2016-09-13 22:52:49 +0200 (Di, 13. Sep 2016) $
+ * @lastmodified    $Date: 2016-11-26 10:27:02 +0100 (Sa, 26. Nov 2016) $
  *
  */
 /* -------------------------------------------------------- */
@@ -117,7 +117,7 @@ $aTplData = array (
             'DropletId'             => $aDroplets['id'],
             'modified_when'         => date('d.m.Y'.' '.'H:i', $aDroplets['modified_when']+TIMEZONE),
             'active'                => $aDroplets['id'],
-            'ActiveIcon'            => ($aDroplets['active']?'status_1_1':'status_1_0'),
+            'ActiveIcon'            => ($aDroplets['active']?'1':'0'),
         );
 /*----------------------------------------------------------------------------------------------------------------------*/
         $oTpl->set_var($aTplData);

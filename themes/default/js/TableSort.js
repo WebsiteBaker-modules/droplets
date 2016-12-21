@@ -7,7 +7,7 @@
     "use strict";
 
     var JB_Table = function(tab) {
-    
+
         var up = String.fromCharCode(9650);
         var down = String.fromCharCode(9660);
         // var up = String.fromCharCode(8593);
@@ -30,9 +30,9 @@ console.info(Titel);
         var Arr = new Array(nzeilen);
         var ct = 0;
         var sdir = new Array(nspalten);
-        var stype = new Array(nspalten); 
-        var sortable = new Array(nspalten); 
-        for(var i=0;i<nspalten;i++) { 
+        var stype = new Array(nspalten);
+        var sortable = new Array(nspalten);
+        for(var i=0;i<nspalten;i++) {
             stype[i] = "n";
             sdir[i] = "u";
             sortable[i] = false;
@@ -153,9 +153,9 @@ console.info(Titel);
             stype[s] = "s";
             return val.toLowerCase().replace(/\u00e4/g,"ae").replace(/\u00f6/g,"oe").replace(/\u00fc/g,"ue").replace(/\u00df/g,"ss");
         } // convert
-        
+
         var elementText;
-        if(document.body.textContent) 
+        if(document.body.textContent)
             elementText = function(elem) {
                 return elem.textContent;
             }
@@ -187,11 +187,11 @@ console.info(Titel);
                     Arr[z] = new Array(nspalten+1);
                     Arr[z][nspalten] = tz[z];
                     for(var s=0;s<nspalten;s++) {
-                        if (zelle[s].getAttribute("data-sort_key")) 
+                        if (zelle[s].getAttribute("data-sort_key"))
                             var zi = convert(zelle[s].getAttribute("data-sort_key"),s);
-                        else if (zelle[s].getAttribute("sort_key")) 
+                        else if (zelle[s].getAttribute("sort_key"))
                             var zi = convert(zelle[s].getAttribute("sort_key"),s);
-                        else 
+                        else
                             var zi = convert(elementText(zelle[s]),s);
                         Arr[z][s] = zi ;
                         // zelle[s].innerHTML += "<br>"+zi; // zum Debuggen
@@ -237,7 +237,8 @@ console.info(tab);
             }
     }
         if(ct==0) {
-            for(var i=0;i<Titel.length;i++) 
+console.info(Titel);
+            for(var i=0;i<Titel.length;i++)
                 initTableHead(Titel[i],i);
             defsort = 0;
         }
@@ -251,25 +252,26 @@ console.info(tab);
         if (!document.querySelectorAll) return;
         var Sort_Table = document.querySelectorAll("table.sortierbar");
         var JB_Tables = [];
-        for(var i=0;i<Sort_Table.length;i++) JB_Tables[i] = new JB_Table(Sort_Table[i]);
+        for(var i=0;i<Sort_Table.length;i++){ JB_Tables[i] = new JB_Table(Sort_Table[i]);}
+console.info(JB_Tables);
 
         var pars = decodeURI(window.location.search.substring(1));
         if(pars.length) { // jbts=((0,1),(10,0),(3,3),(2,2))   tnr,snr
             pars = pars.replace(/\s/g,"");
-            pars = pars.match(/jbts=\(?(\(\d+,\d+\),?){1,}\)?/gi); 
+            pars = pars.match(/jbts=\(?(\(\d+,\d+\),?){1,}\)?/gi);
             if(pars) {
-                pars = pars[0].substr(pars[0].search("=")+1); 
-                pars = pars.replace(/\(\(/g,"(").replace(/\)\)/g,")").replace(/\)\(/g,")|(").replace(/\),\(/g,")|("); 
+                pars = pars[0].substr(pars[0].search("=")+1);
+                pars = pars.replace(/\(\(/g,"(").replace(/\)\)/g,")").replace(/\)\(/g,")|(").replace(/\),\(/g,")|(");
                 pars = pars.split("|");
                 for(var i=0;i<pars.length;i++) {
-                    var p = pars[i].substring(1,pars[i].length-1).split(","); 
+                    var p = pars[i].substring(1,pars[i].length-1).split(",");
                     if(p[0]>-1&&p[0]<JB_Tables.length) JB_Tables[p[0]].sort(p[1]);
                 }
             }
-        } 
+        }
     } // initTableSort
 
     if(window.addEventListener) window.addEventListener("DOMContentLoaded",JB_initTableSort,false);
-    else if(window.attachEvent) window.attachEvent("onload",JB_initTableSort); 
+    else if(window.attachEvent) window.attachEvent("onload",JB_initTableSort);
 
 })();

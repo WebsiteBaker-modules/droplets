@@ -25,7 +25,7 @@
  * @author       Manuela v.d.Decken <manuela@isteam.de>
  * @license      http://www.gnu.org/licenses/gpl.html   GPL License
  * @version      3.0.1
- * @lastmodified $Date: 2016-09-13 22:52:49 +0200 (Di, 13. Sep 2016) $
+ * @lastmodified $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  * @since        File available since 17.12.2015
  * @description  xyz
  */

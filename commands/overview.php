@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: overview.php 124 2016-11-26 09:27:02Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/commands/overview.php $
- * @lastmodified    $Date: 2016-11-26 10:27:02 +0100 (Sa, 26. Nov 2016) $
+ * @version         $Id: overview.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/commands/overview.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  */
 /* -------------------------------------------------------- */
@@ -21,14 +21,14 @@
 if(defined('WB_PATH') == false) { die('Illegale file access /'.basename(__DIR__).'/'.basename(__FILE__).''); }
 /* -------------------------------------------------------- */
 $msg = array();
-if( !$oApp->get_permission($sAddonName,'module' ) ) {
+if (!$oApp->get_permission($sAddonName,'module' ) ) {
     $oApp->print_error($MESSAGE['ADMIN_INSUFFICIENT_PRIVELLIGES'], $js_back);
     exit();
 }
 // Get userid for showing admin only droplets or not
-$loggedin_user = ($oApp->ami_group_member('1') ? 1 : $oApp->get_user_id() );
+$loggedin_user  = ($oApp->ami_group_member('1') ? 1 : $oApp->get_user_id() );
 $loggedin_group = $oApp->get_groups_id();
-$oApp_user = ( ($oApp->get_home_folder() == '') && ($oApp->ami_group_member('1') ) || ($loggedin_user == '1'));
+$oApp_user      = (($oApp->get_home_folder() == '') && ($oApp->ami_group_member('1') ) || ($loggedin_user == '1'));
 //removes empty entries from the table so they will not be displayed
 $sql = 'DELETE FROM `'.TABLE_PREFIX.'mod_droplets` '
      . 'WHERE name = \'\' ';
@@ -64,12 +64,12 @@ $oDroplets = $oDb->query($sql);
 $num_droplets = $oDroplets->numRows();
 $aFtan = $admin->getFTAN('');
 // prepare default data for phplib and twig
-$aTplData = array (
-        'action' => $action,
-        'FTAN_NAME' => $aFtan['name'],
-        'FTAN_VALUE' => $aFtan['value'],
-        'IDKEY0' => $oApp->getIDKEY(0),
-        );
+    $aTplData = array (
+            'action' => $action,
+            'FTAN_NAME' => $aFtan['name'],
+            'FTAN_VALUE' => $aFtan['value'],
+            'IDKEY0' => $oApp->getIDKEY(0),
+            );
 // Create new template object with phplib  IDKEY0
     $oTpl = new Template($sAddonThemePath, 'keep' );
     $oTpl->set_file('page', 'overview.htt');
@@ -93,8 +93,8 @@ $aTplData = array (
             $modified_userid = $fetch_modified_user['user_id'];
         }
         $sDropletName  =  mb_strlen($aDroplets['name']) > 20 ? mb_substr($aDroplets['name'], 0, 19).'…' : $aDroplets['name'];
-
-        $sDropletDescription  =  mb_strlen($aDroplets['description']) > 60 ? mb_substr($aDroplets['description'], 0, 59).'…' : $aDroplets['description'];
+#        $sDropletDescription  =  mb_strlen($aDroplets['description']) > 60 ? mb_substr($aDroplets['description'], 0, 59).'…' : $aDroplets['description'];
+        $sDropletDescription  =  $aDroplets['description'];
 //        $iDropletIdKey = $aDroplets['id'];
         $iDropletIdKey = $oApp->getIDKEY($aDroplets['id']);
         $comments = '';

@@ -24,9 +24,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.4
  * @requirements    PHP 5.4 and higher
- * @version         $Id: restore_droplets.php 16 2016-09-13 20:52:49Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/commands/restore_droplets.php $
- * @lastmodified    $Date: 2016-09-13 22:52:49 +0200 (Di, 13. Sep 2016) $
+ * @version         $Id: restore_droplets.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/commands/restore_droplets.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  */
  /* -------------------------------------------------------- */
@@ -36,17 +36,17 @@ if(defined('WB_PATH') == false) { die('Cannot access '.basename(__DIR__).'/'.bas
 
     $aUnzipDroplets = array();
 /**
- * 
+ *
 */
      if(!$oApp->checkFTAN() ) {
-        msgQueue::add($MESSAGE['GENERIC_SECURITY_ACCESS']);
+        msgQueue::add($oTrans->MESSAGE_GENERIC_SECURITY_ACCESS);
     } elseif(!isset($aRequestVars['restore_id']) || !is_array($aRequestVars['restore_id'])) {
-        msgQueue::add('::'.$Droplet_Message['MISSING_UNMARKED_ARCHIVE_FILES'] );
+        msgQueue::add('::'.$oTrans->DROPLET_MESSAGE_MISSING_UNMARKED_ARCHIVE_FILES );
     } else {
         $aDroplet = array();
         if( !class_exists('PclZip',false) ) { require( $oReg->AppPath.'/include/pclzip/pclzip.lib.php'); }
         if(!function_exists('insertDropletFile')) { require($sAddonPath.'/droplets.functions.php'); }
-      // unzip to buffer and store in DB / fetch ach entry as single process, to surpress buffer overflow 
+      // unzip to buffer and store in DB / fetch ach entry as single process, to surpress buffer overflow
         foreach($aRequestVars['restore_id'] as $index => $iArchiveIndex ) {
             $oArchive = new PclZip( $aRequestVars['ArchiveFile'] );
             $sDroplet = $oArchive->extract(PCLZIP_OPT_BY_INDEX, $iArchiveIndex,
@@ -59,22 +59,22 @@ if(defined('WB_PATH') == false) { die('Cannot access '.basename(__DIR__).'/'.bas
 //        if (!preg_match('/^(to|cc|bcc|Reply-To)$/', $kind)) {
                 $aDroplet['name'] = $sDroplet[0]['filename'];
                 $aDroplet['content'] = explode("\n",$sDroplet[0]['content']);
-//                if ( !preg_match('/'.$file_types.'/si', $aDroplet['name'], $aMatch) ) { 
+//                if ( !preg_match('/'.$file_types.'/si', $aDroplet['name'], $aMatch) ) {
 //                  continue; }
                 if( $sTmp = insertDroplet($aDroplet, $oDb, $oApp, false)) {
-                    $aUnzipDroplets[] = $sTmp; 
+                    $aUnzipDroplets[] = $sTmp;
                 }
             }
         }
-// 
+//
         if (($error = $oArchive->errorCode()) != 0 )
         {
-            msgQueue::add( sizeof( $aUnzipDroplets ).' '. $Droplet_Import['ARCHIV_IMPORTED']);
+            msgQueue::add( sizeof( $aUnzipDroplets ).' '. $oTrans->DROPLET_IMPORT_ARCHIV_IMPORTED);
         } else {
             if ( sizeof( $aUnzipDroplets ) > 0 ) {
-                msgQueue::add( implode(', ',$aUnzipDroplets).'<br />'.sizeof( $aUnzipDroplets ).' '. $Droplet_Import['ARCHIV_IMPORTED'], true);
+                msgQueue::add( implode(', ',$aUnzipDroplets).'<br />'.sizeof( $aUnzipDroplets ).' '. $oTrans->DROPLET_IMPORT_ARCHIV_IMPORTED, true);
             } else {
-                msgQueue::add( sizeof( $aUnzipDroplets ).' '. $Droplet_Import['ARCHIV_IMPORTED'], true);
+                msgQueue::add( sizeof( $aUnzipDroplets ).' '. $oTrans->DROPLET_IMPORT_ARCHIV_IMPORTED, true);
             }
         }
     }

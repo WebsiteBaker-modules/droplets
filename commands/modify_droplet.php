@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: modify_droplet.php 16 2016-09-13 20:52:49Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/commands/modify_droplet.php $
- * @lastmodified    $Date: 2016-09-13 22:52:49 +0200 (Di, 13. Sep 2016) $
+ * @version         $Id: modify_droplet.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/commands/modify_droplet.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  */
 /* -------------------------------------------------------- */
@@ -26,11 +26,11 @@ if(!isset($dropletAddId)) {
     $droplet_id = ($oApp->checkIDKEY($droplet_id, false, ''));
 }
 if ($droplet_id === false) {
-    $oApp->print_error('MODIFY_DROPLET_IDKEY::'.$MESSAGE['GENERIC_SECURITY_ACCESS'], $ToolUrl);
+    $oApp->print_error('MODIFY_DROPLET_IDKEY::'.$oTrans->MESSAGE_GENERIC_SECURITY_ACCESS, $ToolUrl);
     exit();
 }
 
-$sOverviewDroplets = $DR_TEXT['DROPLETS'];
+$sOverviewDroplets = $oTrans->DR_TEXT_DROPLETS;
 $sTimeStamp = (@$sTimeStamp?:'');
 $modified_by = $oApp->get_user_id();
 if (($droplet_id > 0)) {
@@ -39,7 +39,7 @@ if (($droplet_id > 0)) {
     $oDroplet = $oDb->query($sql);
     $aDroplet = $oDroplet->fetchRow(MYSQLI_ASSOC);
     $content  = (htmlspecialchars($aDroplet['code']));
-    $sSubmitButton = $TEXT['SAVE'];
+    $sSubmitButton = $oTrans->TEXT_SAVE;
     $iDropletIdKey = $oApp->getIDKEY($droplet_id);
     $dropletAddId = $droplet_id;
 } else {
@@ -62,7 +62,7 @@ if (($droplet_id > 0)) {
         $content = '';
     }
     $dropletAddId = 0;
-    $sSubmitButton = $TEXT['ADD'];
+    $sSubmitButton = $oTrans->TEXT_ADD;
     $iDropletIdKey = $oApp->getIDKEY($droplet_id);
 }
 require_once($oReg->AppPath . '/include/editarea/wb_wrapper_edit_area.php');
@@ -81,7 +81,7 @@ echo registerEditArea ('contentedit','php');
         <tbody>
         <tr>
             <td class="setting_name">
-                <?php echo $TEXT['NAME']; ?>:
+                <?php echo $oTrans->TEXT_NAME; ?>:
             </td>
             <td >
                 <div class="block-outer" style="width: 98%;">
@@ -94,23 +94,23 @@ echo registerEditArea ('contentedit','php');
             </td>
         </tr>
         <tr>
-            <td class="setting_name" ><?php echo $TEXT['DESCRIPTION']; ?>:</td>
+            <td class="setting_name" ><?php echo $oTrans->TEXT_DESCRIPTION; ?>:</td>
             <td>
                 <input type="text" name="description" value="<?php echo stripslashes($aDroplet['description']); ?>" style="width: 98%;" />
             </td>
         </tr>
         <tr>
             <td class="setting_name" >
-                <?php echo $TEXT['ACTIVE']; ?>:
+                <?php echo $oTrans->TEXT_ACTIVE; ?>:
             </td>
             <td>
                 <input type="radio" name="active" id="active_true" value="1" <?php if($aDroplet['active'] == 1) { echo ' checked="checked"'; } ?> />
                 <a href="#" onclick="javascript: document.getElementById('active_true').checked = true;">
-                <label><?php echo $TEXT['YES']; ?></label>
+                <label><?php echo $oTrans->TEXT_YES; ?></label>
                 </a>
                 <input type="radio" name="active" id="active_false" value="0" <?php if($aDroplet['active'] == 0) { echo ' checked="checked"'; } ?> />
                 <a href="#" onclick="javascript: document.getElementById('active_false').checked = true;">
-                <label><?php echo $TEXT['NO']; ?></label>
+                <label><?php echo $oTrans->TEXT_NO; ?></label>
                 </a>
             </td>
         </tr>
@@ -120,27 +120,27 @@ if ($modified_by == 1) {
     ?>
         <tr>
             <td class="setting_name">
-                <?php echo $TEXT['ADMIN']; ?>:
+                <?php echo $oTrans->TEXT_ADMIN; ?>:
             </td>
             <td>
-                <?php echo $DR_TEXT['ADMIN_EDIT']; ?>&nbsp;
+                <?php echo $oTrans->DR_TEXT_ADMIN_EDIT; ?>&nbsp;
                 <input type="radio" name="admin_edit" id="admin_edit_true" value="1" <?php if($aDroplet['admin_edit'] == 1) { echo ' checked="checked"'; } ?> />
                 <a href="#" onclick="document.getElementById('admin_edit_true').checked = true;">
-                <label><?php echo $TEXT['YES']; ?></label>
+                <label><?php echo $oTrans->TEXT_YES; ?></label>
                 </a>
                 <input type="radio" name="admin_edit" id="admin_edit_false" value="0" <?php if($aDroplet['admin_edit'] == 0) { echo ' checked="checked"'; } ?> />
                 <a href="#" onclick="document.getElementById('admin_edit_false').checked = true;">
-                <label><?php echo $TEXT['NO']; ?></label>
+                <label><?php echo $oTrans->TEXT_NO; ?></label>
                 </a>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <?php echo $DR_TEXT['ADMIN_VIEW']; ?>:
+                <?php echo $oTrans->DR_TEXT_ADMIN_VIEW; ?>:
                 <input type="radio" name="admin_view" id="admin_view_true" value="1" <?php if($aDroplet['admin_view'] == 1) { echo ' checked="checked"'; } ?> />
                 <a href="#" onclick="document.getElementById('admin_view_true').checked = true;">
-                <label><?php echo $TEXT['YES']; ?></label>
+                <label><?php echo $oTrans->TEXT_YES; ?></label>
                 </a>
                 <input type="radio" name="admin_view" id="admin_view_false" value="0" <?php if($aDroplet['admin_view'] == 0) { echo ' checked="checked"'; } ?> />
                 <a href="#" onclick="document.getElementById('admin_view_false').checked = true;">
-                <label><?php echo $TEXT['NO']; ?></label>
+                <label><?php echo $oTrans->TEXT_NO; ?></label>
                 </a>
             </td>
         </tr>
@@ -148,9 +148,8 @@ if ($modified_by == 1) {
 }
 ?>
         <tr>
-            <td class="setting_name"><?php echo $TEXT['CODE']; ?>:</td>
+            <td class="setting_name"><?php echo $oTrans->TEXT_CODE; ?>:</td>
             <td >
-
             <textarea name="savecontent" id ="contentedit" style="width: 98%; height: 450px;" rows="50" cols="120"><?php echo $content; ?></textarea>
             </td>
         </tr>
@@ -158,7 +157,7 @@ if ($modified_by == 1) {
             <td colspan="2"></td>
         </tr>
         <tr>
-            <td class="setting_name" ><?php echo $TEXT['COMMENTS']; ?>:</td>
+            <td class="setting_name" ><?php echo $oTrans->TEXT_COMMENTS; ?>:</td>
             <td>
                 <textarea name="comments" style="width: 98%; height: 100px;" rows="50" cols="120"><?php echo ($aDroplet['comments']); ?></textarea>
             </td>
@@ -180,7 +179,7 @@ if ($modified_by == 1 || $aDroplet['admin_edit'] == 0 ) {
 <?php
 }
 ?>
-            <button class="btn" type="button" onclick="window.location = '<?php echo $ToolUrl; ?>';"><?php echo $TEXT['CANCEL']; ?></button>
+            <button class="btn" type="button" onclick="window.location = '<?php echo $ToolUrl; ?>';"><?php echo $oTrans->TEXT_CANCEL; ?></button>
         </td>
     </tr>
 </table>

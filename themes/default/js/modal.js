@@ -61,11 +61,11 @@ var Modal = function(){
 
             config.$modalClose.addEventListener("click", function(){
                 Modal.close();
-            }, false); 
+            }, false);
 
             config.$modalTrigger.addEventListener("click", function(){
                 Modal.open();
-            }, false); 
+            }, false);
 
             window.addEventListener("keydown", function(e){
                 console.log(e.keyCode);

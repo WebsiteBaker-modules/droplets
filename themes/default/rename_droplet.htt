@@ -12,9 +12,9 @@
             <input type="hidden" name="{FTAN_NAME}" value="{FTAN_VALUE}" />
             <span id="customConfirm" style="display: block;">
                 <button name="cancel" class="close" type="button" onclick="window.location='{ToolUrl}';">X</button>
-                <header class="modal-label"><h2>{HEADER_DROPLET}</h2></header>
+                <header class="modal-label"><h3>{HEADER_DROPLET}</h3></header>
                 <div class="modal-inner ">
-                     <h3 style="padding-left: 1.825em;">{sDropletHelp}</h3>
+                     <h4 style="padding-left: 1.825em;">{sDropletHelp}</h4>
                     <div class="subcolumn" class="block-outer" >
                         <input type="text" name="title" value="{DropletName}" class="rename-input form-field " maxlength="32" />
                     </div>
@@ -22,7 +22,7 @@
             <!-- BEGIN show_admin_edit_block -->
                         <button name="command" type="submit" value="save_rename?droplet_id={iDropletIdKey}" class="confirm">{sSubmitButton}</button>
             <!-- END show_admin_edit_block -->
-                        <button name="cancel" class="cancel" type="button" onclick="window.location='{ToolUrl}';">{CANCEL}</button>
+                        <button name="cancel" class="cancel" type="button" onclick="window.location='{ToolUrl}';">{TEXT_CANCEL}</button>
                     </div>
                 </div>
                 <footer class="modal-label">

@@ -1,5 +1,5 @@
 <?php
-// $Id: DE.php 16 2016-09-13 20:52:49Z dietmar $
+// $Id: DE.php 65 2017-03-03 21:38:16Z manu $
 
 /*
 
@@ -29,6 +29,7 @@ $DR_TEXT['ADD_DROPLET']   = 'Droplet hinzufügen';
 $DR_TEXT['ADMIN_EDIT']    = 'bearbeiten';
 $DR_TEXT['ADMIN_VIEW']    = 'ansehen';
 $DR_TEXT['ARCHIV_LOAD']   = 'Archivdatei laden';
+$DR_TEXT['ACTION']        = 'Droplets '.PHP_EOL.'umbennenen'.PHP_EOL.''.'einschalten/ausschalten'.PHP_EOL.'löschen';
 $DR_TEXT['BACKUP']        = 'Droplets sichern (Zip)';
 $DR_TEXT['COPY']          = 'Ein Droplet kopieren';
 $DR_TEXT['DELETE']        = 'Löschen';
@@ -54,8 +55,10 @@ $DR_TEXT['INACTIVE']      = 'Inaktiv';
 $DR_TEXT['VALID_CODE']    = 'Code valide';
 $DR_TEXT['INVALID_CODE']  = 'Code fehlerhaft';
 $DR_TEXT['COPY_DROPLET']  = 'Duplizieren';
+$TEXT['INACTIVE']         = 'Inaktiv';
+$TEXT['ACTIVE']           = 'Aktiv';
 
-$Droplet_Message = array (
+$DROPLET_MESSAGE = array (
     'ARCHIVE_DELETED' => 'Archivdatei erfolgreich gelöscht.',
     'ARCHIVE_NOT_DELETED' => 'Archivdatei konnte nicht gelöscht werden.',
     'CONFIRM_DROPLET_DELETING' => 'Möchten Sie folgende Droplets wirklich löschen?',
@@ -68,7 +71,7 @@ $Droplet_Message = array (
     'GENERIC_LOCAL_UPLOAD' => 'Lokales Archiv laden und wiederherstellen',
     );
 
-$Droplet_Header = array (
+$DROPLET_HEADER = array (
     'INDEX' => 'Id',
     'PATH' => 'Verzeichnis',
     'FILENAME' => 'Dropletname',
@@ -79,13 +82,13 @@ $Droplet_Header = array (
     'SELECT_DROPLET' => 'Droplet auswählen',
     );
 
-$Droplet_Select_Order = array (
+$DROPLET_SELECT_ORDER = array (
     'CHOOSE_ORDER'=>'Droplets sortieren nach',
     'ASC' => 'Aufsteigend',
     'DESC'=> 'Absteigend',
     );
 
-$Droplet_Select_Option = array (
+$DROPLET_SELECT_OPTION = array (
         'ASC' => 'Aufsteigend', array(
         '1' => 'Dropletname',
         '2' => 'Zuletzt bearbeitet'
@@ -96,13 +99,13 @@ $Droplet_Select_Option = array (
         )
     );
 
-$Droplet_Help = array (
+$DROPLET_HELP = array (
     'DROPLET_DELETE' => 'Löschen von Droplets. Klick löscht das entsprechende Droplet in der ausgewählten Zeile. Durch Auswahl lassen sich auch mehrere Droplets auf einmal löschen. ',
     'DROPLET_RENAME' => 'Sie können jetzt das Droplet umbenennen. ',
     'DROPLET_RENAME_ADD' => 'Geben Sie jetzt einen neuen Dropletnamen ein. ',
 );
 
-$Droplet_Import = array (
+$DROPLET_IMPORT = array (
       'ARCHIV_LOADED' => 'Archivdatei erfolgreich geladen! Wählen Sie ein odere mehrere Droplets zur Wiederherstellung aus.',
       'ARCHIV_IMPORTED' => 'Ausgewählte Droplets in Datenbank importiert! ',
       'UPATE_EXISTING_DROPLETS' => 'Sollen bestehende Droplets überschrieben werden?',

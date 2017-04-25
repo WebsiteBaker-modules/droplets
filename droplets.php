@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.x
  * @requirements    PHP 5.2.2 and higher
- * @version         $Id: droplets.php 16 2016-09-13 20:52:49Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/droplets.php $
- * @lastmodified    $Date: 2016-09-13 22:52:49 +0200 (Di, 13. Sep 2016) $
+ * @version         $Id: droplets.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/droplets.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  *    droplets are small codeblocks that are called from anywhere in the template.
  *     To call a droplet just use [[dropletname]]. optional parameters for a droplet can be used like [[dropletname?parameter=value&parameter2=value]]\

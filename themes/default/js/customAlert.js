@@ -6,7 +6,7 @@
  * Alert e confirm personalizados.
  * FF, Chromer, IE(>=9)*
  *
- * 
+ *
  * window.customAlert e window.customConfirm devem permanecer com esses nomes,
  * a não ser que você saiba o que esta fazendo.
  */

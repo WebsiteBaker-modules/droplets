@@ -10,7 +10,7 @@
  * window.customAlert e window.customConfirm devem permanecer com esses nomes,
  * a não ser que você saiba o que esta fazendo.
  */
-#customAlert-overlay, 
+#customAlert-overlay,
 #customConfirm-overlay { display: none; opacity: 0.5; position: fixed; top: 0px; left: 0px; width: 100vw; height: 100vh; z-index: 99999; background: #000000; }
 #customAlert { background: #FFFFFF; }
 #customAlert button { color: #5E5E5E; background: #BABABA; }
@@ -30,7 +30,7 @@
 #customConfirm { border-radius: 5px; width: 40%; font-size: 1.125em; /*display: none;*/ position: fixed; max-width: 100vw; max-height: 100vh; /*z-index: 1000;*/ top: 5%; margin: auto 30%; padding: 0.125em; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3); -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3); -webkit-transition: opacity 400ms ease-in 0s; -moz-transition: opacity 400ms ease-in 0s; transition: opacity 400ms ease-in 0s; }
 
 #customAlert header,
-#customConfirm header { color: #3E6D86; text-align: left; font-size: 1.125em; font-weight: bold; background: rgba(0, 0, 0, 0) linear-gradient(#fff, #999) repeat scroll 0 0; height: 1.925em; }
+#customConfirm header { color: #3E6D86; text-align: left; font-size: 1.125em; font-weight: bold; background: rgba(0, 0, 0, 0) linear-gradient(#fff, #999) repeat scroll 0 0; }
 
 #customAlert .body,
 #customConfirm .body { padding: 0; color: #5C5C5C; font-size: 1.125em; background: #FFFFFF; text-align: center; opacity: 1; }

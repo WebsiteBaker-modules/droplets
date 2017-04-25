@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: backup_droplets.php 44 2016-09-22 08:43:36Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/commands/backup_droplets.php $
- * @lastmodified    $Date: 2016-09-22 10:43:36 +0200 (Do, 22. Sep 2016) $
+ * @version         $Id: backup_droplets.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/commands/backup_droplets.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
 
 print '<pre  class="mod-pre rounded">function <span>'.__FUNCTION__.'( '.''.' );</span>  filename: <span>'.basename(__FILE__).'</span>  line: '.__LINE__.' -> <br />';
@@ -29,7 +29,7 @@ $sOverviewDroplets = $TEXT['LIST_OPTIONS'];
 // suppress to print the header, so no new FTAN will be set
 //$oApp = new admin('Addons', 'templates_uninstall', false);
 if( !$oApp->checkFTAN() ){
-    $oApp->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $ToolUrl );
+    $oApp->print_error($oTrans->MESSAGE_GENERIC_SECURITY_ACCESS, $ToolUrl );
     exit();
 }
 // After check print the header
@@ -46,7 +46,7 @@ $sDropletTmpDir = 'temp/modules/'.$sAddonName.'/tmp/';
 rm_full_dir($oReg->AppPath.$sDropletTmpDir, true);
 make_dir( $oReg->AppPath.$sDropletTmpDir );
 
-$sTimeStamp = '_'.strftime('%Y%m%d_%H%M%S', time()+ TIMEZONE ).'.zip';
+$sTimeStamp = '_'.strftime('%Y%m%d_%H%M%S', time() + $oReg->Timezone ).'.zip';
 
 $FilesInDB = '*';
 $aFullList = glob($sAddonPath.'/data/archiv/*.zip', GLOB_NOSORT);
@@ -106,13 +106,13 @@ if ($archiveList == 0){
 
 </ol>
 <div class="drop-backup">
-<h2>Backup created - <a class="btn" href="<?php echo $oReg->AppUrl.$sBackupDir.$sBackupName; ?>"><?php echo $Droplet_Message['GENERIC_LOCAL_DOWNLOAD']; ?></a>
-                  <button style="padding: 0.2825em 0.8525em; " name="cancel" class="btn" type="button" onclick="window.location='<?php echo $ToolUrl; ?>';"><?php echo $TEXT['CANCEL']; ?></button>
+<h2>Backup created - <a class="btn" href="<?php echo $oReg->AppUrl.$sBackupDir.$sBackupName; ?>"><?php echo $oTrans->DROPLET_MESSAGE_GENERIC_LOCAL_DOWNLOAD; ?></a>
+                  <button style="padding: 0.2825em 0.8525em; " name="cancel" class="btn" type="button" onclick="window.location='<?php echo $ToolUrl; ?>';"><?php echo $oTrans->TEXT_CANCEL; ?></button>
 
 </h2>
 </div>
 </section>
 <?php  } else {
-    msgQueue::add('Backup not created - '.$TEXT['BACK'].'');
+    msgQueue::add('Backup not created - '.$oTrans->TEXT_BACK.'');
 }
 

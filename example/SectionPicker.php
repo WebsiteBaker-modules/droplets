@@ -15,13 +15,13 @@ global $database, $wb, $TEXT, $DGTEXT,$section_id,$page_id;
               . 'FROM `'.TABLE_PREFIX.'sections` `s`'
               . 'INNER JOIN `'.TABLE_PREFIX.'pages` `p` '
               .    'ON `p`.`page_id`=`s`.`page_id` '
-             . 'WHERE `s`.`section_id` = '.( int)$sid.' '
-             .   'AND ('
-             .         '('.$now.'>=`s`.`publ_start` OR `s`.`publ_start`=0) AND '
-             .         '('.$now.'<=`s`.`publ_end` OR `s`.`publ_end`=0) '
-             .       ')'
-             .   'AND `p`.`visibility` NOT IN (\'none\',\'deleted\') '
-             .   '  ';
+              . 'WHERE `s`.`section_id` = '.( int)$sid.' '
+              .   'AND ('
+              .         '('.$now.'>=`s`.`publ_start` OR `s`.`publ_start`=0) AND '
+              .         '('.$now.'<=`s`.`publ_end` OR `s`.`publ_end`=0) '
+              .       ')'
+              .   'AND `p`.`visibility` NOT IN (\'deleted\') '
+              .   '  ';
         if ( $oSection = $database->query( $sql)) {
             while ( $aSection = $oSection->fetchRow( MYSQLI_ASSOC)) {
                 $section_id = $aSection['section_id'];
@@ -54,4 +54,5 @@ global $database, $wb, $TEXT, $DGTEXT,$section_id,$page_id;
             }
         }
     }
+
     return $_sFrontendCss.$content;

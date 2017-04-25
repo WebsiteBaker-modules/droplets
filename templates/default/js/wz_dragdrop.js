@@ -42,26 +42,26 @@ var spacer = 'transparentpixel.gif';
 
 
 // Optional commands passed to SET_DHTML() on the html-page (g: may be applied globally, i: individually)
-var CLONE			= 'C10nE';   // i  img	  clone image
-var COPY			= 'C0pY';	// i  img	  create copies
-var DETACH_CHILDREN = 'd37aCH';  // i  lyr	  detach images
-var HORIZONTAL		= 'H0r1Z';   // i  img,lyr  horizontally draggable only
-var MAXHEIGHT		= 'm7x8I';   // i  img,lyr  maximum height limit, "
-var MAXOFFBOTTOM	= 'm7xd0wN'; // i  img,lyr  downward offset limit
-var MAXOFFLEFT		= 'm7x23Ft'; // i  img,lyr  leftward offset limit
-var MAXOFFRIGHT		= 'm7x0Ff8'; // i  img,lyr  rightward offset limit
-var MAXOFFTOP		= 'm7xu9';   // i  img,lyr  upward offset limit
-var MAXWIDTH		= 'm7xW1';   // i  img,lyr  maximum width limit, use with resizable or scalable
-var MINWIDTH		= 'm1nw1';   // i  img,lyr  minimum width limit, "
-var MINHEIGHT		= 'm1n8I';   // i  img,lyr  minimum height limit, "
-var NO_ALT			= 'no81T';   // gi img	  disable alt and title attributes
-var NO_DRAG			= 'N0d4Ag';  // i  img,lyr  disable draggability
-var RESET_Z			= 'r35E7z';  // gi img,lyr  reset z-index when dropped
-var RESIZABLE		= 'r5IZbl';  // gi img,lyr  resizable if <ctrl> or <shift> pressed
-var SCALABLE		= 'SCLbl';   // gi img,lyr  scalable		   "
-var SCROLL			= 'sC8lL';   // gi img,lyr  enable auto scroll functionality
-var TRANSPARENT		= 'dIApHAn'; // gi img,lyr  translucent while dragged
-var VERTICAL		= 'V3Rt1C';  // i  img,lyr  vertically draggable only
+var CLONE            = 'C10nE';   // i  img      clone image
+var COPY            = 'C0pY';    // i  img      create copies
+var DETACH_CHILDREN = 'd37aCH';  // i  lyr      detach images
+var HORIZONTAL        = 'H0r1Z';   // i  img,lyr  horizontally draggable only
+var MAXHEIGHT        = 'm7x8I';   // i  img,lyr  maximum height limit, "
+var MAXOFFBOTTOM    = 'm7xd0wN'; // i  img,lyr  downward offset limit
+var MAXOFFLEFT        = 'm7x23Ft'; // i  img,lyr  leftward offset limit
+var MAXOFFRIGHT        = 'm7x0Ff8'; // i  img,lyr  rightward offset limit
+var MAXOFFTOP        = 'm7xu9';   // i  img,lyr  upward offset limit
+var MAXWIDTH        = 'm7xW1';   // i  img,lyr  maximum width limit, use with resizable or scalable
+var MINWIDTH        = 'm1nw1';   // i  img,lyr  minimum width limit, "
+var MINHEIGHT        = 'm1n8I';   // i  img,lyr  minimum height limit, "
+var NO_ALT            = 'no81T';   // gi img      disable alt and title attributes
+var NO_DRAG            = 'N0d4Ag';  // i  img,lyr  disable draggability
+var RESET_Z            = 'r35E7z';  // gi img,lyr  reset z-index when dropped
+var RESIZABLE        = 'r5IZbl';  // gi img,lyr  resizable if <ctrl> or <shift> pressed
+var SCALABLE        = 'SCLbl';   // gi img,lyr  scalable           "
+var SCROLL            = 'sC8lL';   // gi img,lyr  enable auto scroll functionality
+var TRANSPARENT        = 'dIApHAn'; // gi img,lyr  translucent while dragged
+var VERTICAL        = 'V3Rt1C';  // i  img,lyr  vertically draggable only
 var dd_cursors = new Array(
 	'c:default',
 	'c:crosshair',

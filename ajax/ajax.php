@@ -1,20 +1,4 @@
 <?php
-/**
- * WebsiteBaker CMS module: mpForm
- * ===============================
- * This module allows you to create customised online forms, such as a feedback form with file upload and email attachment mpForm allows forms over one or more pages.  User input for the same session_id will become a single row in the submitted table.  Since Version 1.1.0 many ajax helpers enable you to speed up the process of creating forms with this module.
- *
- * @category            page
- * @module              mpform
- * @version             1.1.22
- * @authors             Frank Heyne, NorHei(heimsath.org), Christian M. Stefan (Stefek), Quinto, Martin Hecht (mrbaseman)
- * @copyright           (c) 2009 - 2016, WebsiteBaker Org. e.V.
- * @url                 http://forum.websitebaker.org/index.php/topic,28496.0.html
- * @license             GNU General Public License
- * @platform            2.8.x
- * @requirements
- *
- **/
 
 // initialize json_respond array  (will be sent back)
 $aJsonRespond = array();
@@ -28,14 +12,14 @@ $aJsonRespond['success'] = FALSE;
         }
 
         // check if arguments are set
-        if (isset($_POST['iRecordID']) && $_POST['iRecordID'] !=0)
+        if (isset($_POST['iRecordID']) && ($_POST['iRecordID'] !=0) && is_numeric($_POST['iRecordID']) )
         {
             // require config for Core Constants
             require(dirname(dirname(dirname(__DIR__))).'/config.php');
             // retrieve Data from ajax data string
-            $sDbRecordTable  = TABLE_PREFIX.$_POST['DB_RECORD_TABLE'];
-            $sDbColumn  = $_POST['DB_COLUMN'];
-            $iRecordID = $_POST['iRecordID'];
+            $sDbRecordTable  = TABLE_PREFIX.'mod_droplets';
+            $sDbColumn  = 'id';
+            $iRecordID = intval($_POST['iRecordID']);
             $sModuleDIR  = $_POST['MODULE'];
             // Check if user has enough rights to do this:
             if (!class_exists('admin', false)){require(WB_PATH.'/framework/class.admin.php');}
@@ -56,7 +40,7 @@ $aJsonRespond['success'] = FALSE;
         {
             case 'active_status':
                 // Check the Parameters
-                if(isset($_POST['action']) && $_POST['action'] == 'active_status')        {
+                if(isset($_POST['action']) && $_POST['action'] == 'active_status') {
                    // if(!is_numeric($iRecordID)) {
                    //         $iRecordID = $admin->checkIDKEY($iRecordID);
                    // }

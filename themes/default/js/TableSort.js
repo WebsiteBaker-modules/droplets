@@ -26,7 +26,7 @@
         if (nzeilen==0) return;
         var nspalten = tz[0].cells.length;
         var Titel = tab.getElementsByTagName("thead")[0].getElementsByTagName("tr")[0].getElementsByTagName("th");
-console.info(Titel);
+//console.info(Titel);
         var Arr = new Array(nzeilen);
         var ct = 0;
         var sdir = new Array(nspalten);
@@ -225,7 +225,7 @@ console.info(Titel);
         } // sort
 
 //        if(!tab.title.length) tab.title="Ein Klick auf die Spalten\u00fcberschrift sortiert die Tabelle.";
-console.info(tab);
+//console.info(tab);
         if(!tab.title.length) tab.title="";
         for(var i=Titel.length-1;i>-1;i--) {
             var t=Titel[i];
@@ -237,7 +237,7 @@ console.info(tab);
             }
     }
         if(ct==0) {
-console.info(Titel);
+//console.info(Titel);
             for(var i=0;i<Titel.length;i++)
                 initTableHead(Titel[i],i);
             defsort = 0;
@@ -253,7 +253,7 @@ console.info(Titel);
         var Sort_Table = document.querySelectorAll("table.sortierbar");
         var JB_Tables = [];
         for(var i=0;i<Sort_Table.length;i++){ JB_Tables[i] = new JB_Table(Sort_Table[i]);}
-console.info(JB_Tables);
+//console.info(JB_Tables);
 
         var pars = decodeURI(window.location.search.substring(1));
         if(pars.length) { // jbts=((0,1),(10,0),(3,3),(2,2))   tnr,snr

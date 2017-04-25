@@ -2,12 +2,14 @@
 <div id="openModal" class="modal-Dialog" draggable="true">
     <div>
         <span id="customConfirm" style="display: block;">
-            <button id="closeHelpBo" class="close x" name="cancel" type="button" onclick="window.location='{ToolUrl}';">X</button>
-            <header class="modal-label"><h2>Droplet {HELP}</h2></header>
+            <header class="modal-label">
+                <h2>Droplet {DR_TEXT_HELP}</h2>
+            </header>
+            <button id="closeHelpBox" class="close" name="cancel" type="button" onclick="window.location='{ToolUrl}';">X</button>
             <div class="modal-inner">
                 <iframe  src="{sAddonUrl}/DOC/readme.html" style="width: 100%;"></iframe>
                 <div class="footer">
-                    <button class="cancel btn btn-danger" name="cancel" type="button" onclick="window.location='{ToolUrl}';">{CANCEL}</button>
+                    <button class="cancel btn btn-danger" name="cancel" type="button" onclick="window.location='{ToolUrl}';">{TEXT_CANCEL}</button>
                 </div>
             </div>
             <footer class="modal-label">

@@ -1,5 +1,5 @@
 <?php
-// $Id: EN.php 16 2016-09-13 20:52:49Z dietmar $
+// $Id: EN.php 65 2017-03-03 21:38:16Z manu $
 
 /*
 
@@ -29,6 +29,7 @@ $DR_TEXT['ADD_DROPLET']   = 'Add a Droplet';
 $DR_TEXT['ADMIN_EDIT']    = 'Edit a Droplet';
 $DR_TEXT['ADMIN_VIEW']    = 'View';
 $DR_TEXT['ARCHIV_LOAD']   = 'Load an Archive file';
+$DR_TEXT['ACTION']        = 'Droplets '.PHP_EOL.'rename'.PHP_EOL.''.'enabled/disabled'.PHP_EOL.'delete';
 $DR_TEXT['BACKUP']        = 'Backup Droplets (Zip)';
 $DR_TEXT['COPY']          = 'Copy a Droplet';
 $DR_TEXT['DELETE']        = 'Delete a Droplet';
@@ -50,12 +51,14 @@ $DR_TEXT['WYSIWYG']       = 'Wysiwyg';
 $DR_TEXT['UPLOAD']        = 'Upload';
 $DR_TEXT['USED']          = 'This droplet is used on the following page(-s):<br />';
 $DR_TEXT['PLEASE_SELECT'] = 'Please select an Archive file';
-$DR_TEXT['INACTIVE']      = 'Inactive';
 $DR_TEXT['VALID_CODE']    = 'Code valide';
 $DR_TEXT['INVALID_CODE']  = 'Code not valide';
 $DR_TEXT['COPY_DROPLET']  = 'Duplicate';
+$DR_TEXT['INACTIVE']      = 'Disabled';
+$TEXT['INACTIVE']         = 'Disabled';
+$TEXT['ACTIVE']           = 'Enabled';
 
-$Droplet_Message = array (
+$DROPLET_MESSAGE = array (
     'ARCHIVE_DELETED' => 'Zip(s) deleted successfully.',
     'ARCHIVE_NOT_DELETED' => 'Cannot delete the selected Zip(s).',
     'CONFIRM_DROPLET_DELETING' => 'Are you sure you want to delete the selected droplets?',
@@ -68,7 +71,7 @@ $Droplet_Message = array (
     'GENERIC_LOCAL_UPLOAD' => 'Load and restore a locale Zip',
 );
 
-$Droplet_Header = array (
+$DROPLET_HEADER = array (
     'INDEX' => 'Id',
     'PATH' => 'Folder',
     'FILENAME' => 'Dropletname',
@@ -79,13 +82,13 @@ $Droplet_Header = array (
     'SELECT_DROPLET' => 'Select a Zip',
     );
 
-$Droplet_Select_Order = array (
+$DROPLET_SELECT_ORDER = array (
     'CHOOSE_ORDER'=>'Select Droplet Sorting Order',
     'ASC' => 'Ascending',
     'DESC'=> 'Descending',
     );
 
-$Droplet_Select_Option = array (
+$DROPLET_SELECT_OPTION = array (
         'ASC' => 'Ascending', array(
         '1' => 'Dropletname',
         '2' => 'Modified Whem',
@@ -96,13 +99,13 @@ $Droplet_Select_Option = array (
         )
     );
 
-$Droplet_Help = array (
+$DROPLET_HELP = array (
     'DROPLET_DELETE' => 'Delete a Droplet. Click to delete the selected droplet in this row. Durch Auswahl lassen sich auch mehrere Droplets auf einmal löschen. ',
     'DROPLET_RENAME' => 'Now you can rename the Droplet',
     'DROPLET_RENAME_ADD' => 'Input your new Dropletname',
 );
 
-$Droplet_Import = array (
+$DROPLET_IMPORT = array (
       'ARCHIV_LOADED' => 'Zip loaded successfully! Choose one or more droplets to restore.',
       'ARCHIV_IMPORTED' => 'Selected droplets import into the database ! ',
       'UPATE_EXISTING_DROPLETS' => 'Overwrite existing droplets?',

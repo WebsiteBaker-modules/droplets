@@ -16,7 +16,7 @@ domReady(function() {
 // CHANGELOG 20160323
     function addEvent(elem, event, fn) {
         if(!elem) { return false; }
-console.info (elem);
+//console.info (elem);
         if (elem.addEventListener) {
             elem.addEventListener(event, fn, false);
         } else {
@@ -109,7 +109,6 @@ console.info (elem);
       initCheckboxes();
 //      addEvent(document.getElementById('selectOrder'), 'change', changeOrder);
       var dragItems = document.querySelectorAll("[draggable=true]")
-console.info( dragItems );
       for (var i = 0; i < dragItems.length; i++) {
         var draggable = dragItems[i];
         draggable.addEventListener("dragstart",move);
@@ -121,7 +120,6 @@ console.info( dragItems );
     }
     function setCheckboxes() {
         var cb = document.getElementById( 'cb-droplets' ).getElementsByTagName('input');
-console.info(cb);
         var isChecked = document.getElementById('select_all').checked;
         for (var i = 0; i < cb.length; i++) {
             cb[i].checked = isChecked;
@@ -158,12 +156,11 @@ if (typeof Droplet ==="object"){
     console.info(DR_AJAX_PLUGINS);
     */
             $.insert(  Droplet.AddonUrl + 'ajax' +"/ajaxActiveStatus.js");
-    console.info(DR_AJAX_PLUGINS);
             // AjaxHelper change item active status
             $("td.active_status").ajaxActiveStatus({
                     MODULE : Droplet.AddonUrl,
-                    DB_RECORD_TABLE: 'mod_droplets',
                     DB_COLUMN: 'id',
                     sFTAN: ''
             });
 }
+

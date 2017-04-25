@@ -23,17 +23,18 @@ console.info(aOpts);
                         var oLink = $(this).find('a');
                         var oElement = $(this).find('img');
                         var iRecordID = oElement.attr("id").substring(7);
+console.info(iRecordID);
                         var oRecord = $("td#" + aOpts.DB_COLUMN +'_'+ iRecordID);
                         switch(oElement.attr("src")){
-                            case Droplet.ThemeUrl + 'img/24' +"/status_1.png": var action = "status_0"; break;
-                            case Droplet.ThemeUrl + 'img/24' +"/status_0.png": var action = "status_1"; break;
+                            case Droplet.ThemeUrl + 'img/24' +"/status_1.png": var action = "0"; break;
+                            case Droplet.ThemeUrl + 'img/24' +"/status_0.png": var action = "1"; break;
                         }
                                 // pregenerate the data string
-                        var sDataString = 'purpose=active_status&action=active_status&DB_RECORD_TABLE='
-                                        +aOpts.DB_RECORD_TABLE+'&DB_COLUMN='
-                                        +aOpts.DB_COLUMN+'&MODULE='
-                                        +aOpts.MODULE+'&iRecordID='+iRecordID;
-//console.info(Droplet.ThemeUrl);
+                        var sDataString = 'purpose=active_status&action=active_status'+'&MODULE='
+                                        +aOpts.MODULE+'&DB_COLUMN='
+                                        +aOpts.DB_COLUMN+'&iRecordID='
+                                        +iRecordID;
+console.info(Droplet.ThemeUrl);
                         $.ajax({
                                 url: Droplet.AddonUrl +"ajax/ajax.php",
                                 type: "POST",
@@ -42,7 +43,7 @@ console.info(aOpts);
                                 success: function(json_respond) {
                                     if(json_respond.success == true) {
 //                                        oElement.animate({opacity: 0.55}), 'fast';
-                                        oElement.attr("src", Droplet.ThemeUrl + 'img/24' +"/"+ action +".png");
+                                        oElement.attr("src", Droplet.ThemeUrl + 'img/24' +"/status_"+ action +".png");
 //                                        oElement.animate({opacity: 1});
                                     } else {
                                             alert(json_respond.message);

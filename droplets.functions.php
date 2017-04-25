@@ -10,9 +10,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: droplets.functions.php 44 2016-09-22 08:43:36Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/droplets.functions.php $
- * @lastmodified    $Date: 2016-09-22 10:43:36 +0200 (Do, 22. Sep 2016) $
+ * @version         $Id: droplets.functions.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/droplets.functions.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  */
 /* -------------------------------------------------------- */
@@ -113,7 +113,7 @@ function insertDroplet( array $aDroplet, $oDb, $oApp, $bUpdateDroplets = false )
             $bRetval  = (bool)preg_match_all($sPattern, $sFileData, $matches, PREG_SET_ORDER);
             if ( $bRetval == false ) { return $bRetval; }
         }
-        if( isset($aDroplet['output']) ) { $aFileData = file($sDropletFile); }
+        if( isset($aDroplet['output']) ) { $aFileData = file($sDropletFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES); }
         // prepare table mod_droplets fields
         if( sizeof($aFileData) > 0 ) {
                 // get description, comments and oode
@@ -124,7 +124,7 @@ function insertDroplet( array $aDroplet, $oDb, $oApp, $bUpdateDroplets = false )
                 $sComments = '';
                 $sCode = '';
                 while ( sizeof($aFileData) > 0 ) {
-                    $sSqlLine = trim(array_shift($aFileData));
+                    $sSqlLine = (array_shift($aFileData));
                     $isNotCode = (bool)preg_match($sPattern, $sSqlLine);
                     if( $isNotCode==true ) {
 // first step line is description
@@ -197,7 +197,7 @@ function insertDropletFile($aDropletFiles, $oDb, $oApp, &$msg,$bOverwriteDroplet
         }
 // get description, comments and oode
         $sDropletFile = preg_replace('/^\xEF\xBB\xBF/', '', $sDropletFile);
-        if( ($msgSql!='') && ($aFileData = file($sDropletFile)) ) {
+        if( ($msgSql!='') && ($aFileData = file($sDropletFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES))){
                 $bDescription = false;
                 $bComments = false;
                 $bCode = false;
@@ -206,9 +206,9 @@ function insertDropletFile($aDropletFiles, $oDb, $oApp, &$msg,$bOverwriteDroplet
                 $sCode = '';
                 $sPattern = "#//:#im";
                 while ( sizeof($aFileData) > 0 ) {
-                    $sSqlLine = trim(array_shift($aFileData));
+                    $sSqlLine = (array_shift($aFileData));
                     $isNotCode = (bool)preg_match($sPattern, $sSqlLine);
-                    if( $isNotCode==true ) {
+                    if ($isNotCode==true ) {
 // first step line is description
                         if($bDescription==false) {
                             $sDescription .= str_replace('//:','',$sSqlLine);

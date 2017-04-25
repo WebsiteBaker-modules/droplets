@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: import_droplets.php 16 2016-09-13 20:52:49Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/commands/import_droplets.php $
- * @lastmodified    $Date: 2016-09-13 22:52:49 +0200 (Di, 13. Sep 2016) $
+ * @version         $Id: import_droplets.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/commands/import_droplets.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  */
 /* -------------------------------------------------------- */
@@ -21,7 +21,7 @@
 if(defined('WB_PATH') == false) { die('Cannot access '.basename(__DIR__).'/'.basename(__FILE__).' directly'); }
 /* -------------------------------------------------------- */
 if( !$oApp->checkFTAN() ){
-    $oApp->print_error($MESSAGE['GENERIC_SECURITY_ACCESS'], $ToolUrl );
+    $oApp->print_error($oTrans->MESSAGE_GENERIC_SECURITY_ACCESS, $ToolUrl );
     exit();
 }
 
@@ -31,21 +31,21 @@ if( !$oApp->checkFTAN() ){
 
                 move_uploaded_file (
                      $_FILES['zipFiles']['tmp_name'] ,
-                     $oReg->AppPath.'/temp/'. $_FILES['zipFiles']['name'] 
+                     $oReg->AppPath.'/temp/'. $_FILES['zipFiles']['name']
                 );
                 $sArchiveFile = ( $oReg->AppPath.'/temp/'. $_FILES['zipFiles']['name'] );
             } else {
                 $sArchiveFile = ( $oReg->AppPath.$aRequestVars['zipFiles']);
             }
 if (!is_readable( $sArchiveFile)) {
-    msgQueue::add( $Droplet_Message['GENERIC_MISSING_ARCHIVE_FILE'] );
-} else if ( is_readable( $sArchiveFile ) ) { 
+    msgQueue::add( $oTrans->DROPLET_MESSAGE_GENERIC_MISSING_ARCHIVE_FILE );
+} else if ( is_readable( $sArchiveFile ) ) {
 
     if( !class_exists('PclZip',false) ) { require( $oReg->AppPath.'/include/pclzip/pclzip.lib.php'); }
     $oArchive = new PclZip( $sArchiveFile );
     $aFilesInArchiv = $oArchive->listContent();
     if ($aFilesInArchiv == 0) {
-        msgQueue::add( $Droplet_Message['GENERIC_MISSING_ARCHIVE_FILE'] );
+        msgQueue::add( $oTrans->DROPLET_MESSAGE_GENERIC_MISSING_ARCHIVE_FILE );
     } else {
         $aFtan = $admin->getFTAN('');
         // prepare default data for phplib and twig

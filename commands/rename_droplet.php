@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: rename_droplet.php 16 2016-09-13 20:52:49Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/commands/rename_droplet.php $
- * @lastmodified    $Date: 2016-09-13 22:52:49 +0200 (Di, 13. Sep 2016) $
+ * @version         $Id: rename_droplet.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/commands/rename_droplet.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  */
 /* -------------------------------------------------------- */
@@ -26,14 +26,14 @@ if(!isset($iDropletAddId)) {
     $droplet_id = ($oApp->checkIDKEY($droplet_id, false, ''));
 }
 if ($droplet_id === false) {
-    $oApp->print_error('MODIFY_DROPLET_IDKEY::'.$MESSAGE['GENERIC_SECURITY_ACCESS'], $ToolUrl);
+    $oApp->print_error('MODIFY_DROPLET_IDKEY::'.$oTrans->MESSAGE_GENERIC_SECURITY_ACCESS, $ToolUrl);
     exit();
 }
-$sOverviewDroplets = $DR_TEXT['DROPLETS'];
+$sOverviewDroplets = $oTrans->DR_TEXTDROPLETS;
 $sTimeStamp = (@$sTimeStamp?:'');
 $modified_by = $oApp->get_user_id();
 $sHeaderDroplet = $DR_TEXT['ADD_DROPLET'];
-$sDropletHelp = $Droplet_Help['DROPLET_RENAME_ADD'];
+$sDropletHelp = $oTrans->DROPLET_HELP_DROPLET_RENAME_ADD;
 if (($droplet_id > 0)) {
     $sql  = 'SELECT * FROM `'.TABLE_PREFIX.'mod_droplets` '
           . 'WHERE `id` = '.$droplet_id;
@@ -44,8 +44,8 @@ if (($droplet_id > 0)) {
     $sSubmitButton  = $TEXT['SAVE'];
     $iDropletIdKey  = $oApp->getIDKEY($droplet_id);
     $iDropletAddId  = $droplet_id;
-    $sHeaderDroplet = $Droplet_Header['RENAME_DROPLET'];
-    $sDropletHelp   = $Droplet_Help['DROPLET_RENAME'];
+    $sHeaderDroplet = $oTrans->DROPLET_HEADER_RENAME_DROPLET;
+    $sDropletHelp   = $oTrans->DROPLET_HELP_DROPLET_RENAME;
 } else if (isset($aCopyDroplet)){
     $aDroplet = $aCopyDroplet;
     $DropletName   = $aDroplet['name'];
@@ -71,7 +71,7 @@ if (($droplet_id > 0)) {
         $DropletName   = $aDroplet['name'];
         $content = '';
     }
-    $sDropletHelp = $Droplet_Help['DROPLET_RENAME_ADD'];
+    $sDropletHelp = $oTrans->DROPLET_HELP_DROPLET_RENAME_ADD;
     $sSubmitButton = $TEXT['ADD'];
     $iDropletIdKey = $oApp->getIDKEY($aDroplet['id']);
 }

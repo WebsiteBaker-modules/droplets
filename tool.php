@@ -11,9 +11,9 @@
  * @license         http://www.gnu.org/licenses/gpl.html
  * @platform        WebsiteBaker 2.8.3
  * @requirements    PHP 5.3.6 and higher
- * @version         $Id: tool.php 44 2016-09-22 08:43:36Z dietmar $
- * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2-modules/addons/droplets/tool.php $
- * @lastmodified    $Date: 2016-09-22 10:43:36 +0200 (Do, 22. Sep 2016) $
+ * @version         $Id: tool.php 65 2017-03-03 21:38:16Z manu $
+ * @filesource      $HeadURL: svn://isteam.dynxs.de/wb2.10/branches/wb/modules/droplets/tool.php $
+ * @lastmodified    $Date: 2017-03-03 22:38:16 +0100 (Fr, 03. Mrz 2017) $
  *
  */
     function executeDropletTool()
@@ -24,10 +24,6 @@
 */
         if (is_readable(dirname(__DIR__).'/SimpleRegister.php')) {
             require (dirname(__DIR__).'/SimpleRegister.php');
-        }
-        if (!isset($oReg) && class_exists('WbAdaptor', false)){
-              $oReg = WbAdaptor::getInstance();
-// backward compatibilty for upgrade, install, uninstall called from core
         }
 /*******************************************************************************************/
 //      SimpleCommandDispatcher
@@ -42,21 +38,25 @@
         $ToolUrl  = $oReg->AcpUrl.'admintools/tool.php?tool=droplets';
         $ApptoolLink = $oReg->AcpUrl.'admintools/index.php';
         // create default placeholder array for templates htt or Twig use
-        $aLang = array_merge($HEADING,$MENU,$TEXT,$DR_TEXT,$Droplet_Header,$Droplet_Message,$Droplet_Help,$Droplet_Import);
+        $oTrans->enableAddon('modules\\'.$sAddonName);
+        $aLang = $oTrans->getLangArray();
         $aTplDefaults = array (
+              'ADMIN_DIRECTORY' => ADMIN_DIRECTORY,
               'ToolUrl' => $ToolUrl,
               'sAddonUrl' => $sAddonUrl,
               'ApptoolLink' => $ApptoolLink,
               'sAddonThemeUrl'  => $sAddonThemeUrl,
+              'AcpUrl' =>  $oReg->AcpUrl,
+              'AppUrl' =>  $oReg->AppUrl,
               );
         $output = '';
         if ( !class_exists('msgQueue', false) ) { require($oReg->AppPath.'/framework/class.msg_queue.php'); }
         msgQueue::clear();
         if( !$oApp->get_permission($sAddonName,'module' ) ) {
-            $oApp->print_error($MESSAGE['ADMIN_INSUFFICIENT_PRIVELLIGES'], $js_back);
+            $oApp->print_error($oTrans->MESSAGE_ADMIN_INSUFFICIENT_PRIVELLIGES, $js_back);
             exit();
         }
-        $sOverviewDroplets = $TEXT['LIST_OPTIONS'].' '.$DR_TEXT['DROPLETS'];
+        $sOverviewDroplets = $oTrans->TEXT_LIST_OPTIONS.' '.$oTrans->DR_TEXT_DROPLETS;
         // prepare to get parameters (query)) from this URL string e.g. modify_droplet?droplet_id
         $aQuery = array('command'=>'overview');
         $sql = '';
